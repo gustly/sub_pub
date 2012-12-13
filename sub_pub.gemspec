@@ -6,10 +6,10 @@ require 'sub_pub/version'
 Gem::Specification.new do |gem|
   gem.name          = "sub_pub"
   gem.version       = SubPub::VERSION
-  gem.authors       = ["TODO: Write your name"]
-  gem.email         = ["TODO: Write your email address"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.authors       = ["zephyr-dev@googlegroups.com"]
+  gem.email         = ["zephyr-dev@googlegroups.com"]
+  gem.description   = %q{In process publish/subscribe for Ruby}
+  gem.summary       = %q{SubPub is a thin wrapper around ActiveSupport::Notifications, which provides an implementation of the Publish/Subscribe pattern.}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)
