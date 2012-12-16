@@ -5,11 +5,16 @@ describe SubPub do
     table do |t|
       t.string :title
     end
+
+    model do
+      has_many :fake_active_record_results
+    end
   end
 
   with_model :FakeActiveRecordResult do
     table do |t|
       t.string :title
+      t.integer :fake_active_record_user_id
     end
   end
 
@@ -118,10 +123,46 @@ describe SubPub do
     describe "after create" do
       before do
         class FakeActiveRecordUserSubscriber < SubPub::ActiveRecord::Subscriber
+          subscribe_to(FakeActiveRecordUser, 'after_create')
+
+          def on_publish
+            FakeActiveRecordResult.create
+          end
+        end
+      end
+
+      it "successfully calls through to the subscriber" do
+        FakeActiveRecordResult.all.size.should == 0
+        FakeActiveRecordUser.create
+        FakeActiveRecordResult.all.size.should == 1
+      end
+    end
+
+    describe "after commit" do
+      before do
+        class FakeActiveRecordUserSubscriber < SubPub::ActiveRecord::Subscriber
           subscribe_to(FakeActiveRecordUser, 'after_commit')
 
           def on_publish
             FakeActiveRecordResult.create
+          end
+        end
+      end
+
+      it "successfully calls through to the subscriber" do
+        FakeActiveRecordResult.all.size.should == 0
+        FakeActiveRecordUser.create
+        FakeActiveRecordResult.all.size.should == 1
+      end
+    end
+
+    describe "before create" do
+      before do
+        class FakeActiveRecordUserSubscriber < SubPub::ActiveRecord::Subscriber
+          subscribe_to(FakeActiveRecordUser, 'before_create')
+
+          def on_publish
+            record.fake_active_record_results.build(title: 'fooz')
           end
         end
       end

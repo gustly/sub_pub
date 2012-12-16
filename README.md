@@ -95,6 +95,7 @@ Or install it yourself as:
 
 ## Supported Active Record Callbacks
 
+* before_create
 * after_create
 * after_commit
 
