@@ -92,6 +92,13 @@ Or install it yourself as:
     User.create(name: 'John Doe')
     => SubPub.publish("active_record::user::after_create")
 
+
+## Supported Active Record Callbacks
+
+* after_create
+* after_commit
+
+
 ## Backlog / To Do
 
 http://www.pivotaltracker.com/projects/705655
