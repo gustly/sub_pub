@@ -19,30 +19,4 @@ module SubPub
       SubPub.publish(message, record: self)
     end
   end
-
-  class Railtie < Rails::Railtie
-    initializer "pub sub configuration of active record extensions" do
-      class ::ActiveRecord::Base
-        include SubPub::ActiveRecordExtensions
-      end
-
-      config.after_initialize do
-        Dir[
-          File.expand_path("app/models/pub_sub/*.rb", Rails.root)
-        ].each { |file| require file }
-      end
-    end
-  end
-
-  module ActiveRecord
-    class Subscriber < SubPub::Subscriber
-      def self.subscribe_to(class_instance, callback)
-        super("active_record::#{class_instance.to_s.underscore}::#{callback}")
-      end
-
-      def record
-        options[:record]
-      end
-    end
-  end
 end

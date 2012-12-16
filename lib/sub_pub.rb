@@ -41,7 +41,9 @@ require "sub_pub/version"
 require "sub_pub/subscriber"
 require "sub_pub/register"
 
-require 'rails'
-require 'active_record'
+require "rails"
+require "active_record"
 
-require_relative "sub_pub/active_record_extensions"
+require "sub_pub/active_record_subscriber"
+require "sub_pub/active_record_extensions"
+require "sub_pub/railtie"
