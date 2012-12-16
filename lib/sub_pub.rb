@@ -1,5 +1,9 @@
 module SubPub
   class << self
+    def scope=(new_scope)
+      Register.scope = new_scope
+    end
+
     def enable
       Register.enable
     end
@@ -25,6 +29,10 @@ module SubPub
 
     def subscribe(*args, &block)
       Register.subscribe(*args, &block)
+    end
+
+    def unsubscribe_all
+      Register.unsubscribe_all
     end
   end
 end

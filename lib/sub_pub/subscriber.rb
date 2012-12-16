@@ -24,7 +24,7 @@ module SubPub
     end
 
     def self.topic
-      @subscription.instance_variable_get("@pattern")
+      @subscription.topic
     end
 
     def on_publish
