@@ -43,51 +43,25 @@ module SubPub
 
         topic = args.shift
         payload = args.last
+        full_topic = scoped(topic).full_topic
 
-        ActiveSupport::Notifications.publish(with_scope(topic), payload, &block)
+        ActiveSupport::Notifications.publish(full_topic, payload, &block)
       end
 
-      def with_scope(topic)
-        "#{instance.scope}::#{topic}"
+      def scoped(topic)
+        ScopedTopic.new(topic, instance.scope)
       end
 
       def subscribe(*args, &block)
         topic = args.first
 
-        subscription = Subscription.new(
-          topic: topic,
-          scope: instance.scope,
+        options = {
+          scoped_topic: ScopedTopic.new(topic, instance.scope),
           action: block
-        )
+        }
 
-        subscription.subscribe
-
-        instance.subscriptions << subscription
-
-        subscription
-      end
-
-      class Subscription
-        def initialize(options)
-          @topic = options[:topic]
-          @scope = options[:scope]
-          @action = options[:action]
-        end
-
-        def subscribe
-          @subscription = ActiveSupport::Notifications.subscribe(scoped_topic, @action)
-        end
-
-        def scoped_topic
-          "#{@scope}::#{@topic}"
-        end
-
-        def unsubscribe
-          ActiveSupport::Notifications.unsubscribe("#{@scope}::#{@topic}")
-        end
-
-        def topic
-          @topic
+        Subscription.subscribe(options).tap do |subscription|
+          instance.subscriptions << subscription
         end
       end
 

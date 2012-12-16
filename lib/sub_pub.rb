@@ -40,6 +40,8 @@ end
 require "sub_pub/version"
 require "sub_pub/subscriber"
 require "sub_pub/register"
+require "sub_pub/subscription"
+require "sub_pub/scoped_topic"
 
 require "rails"
 require "active_record"
