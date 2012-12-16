@@ -114,21 +114,23 @@ describe SubPub do
     end
   end
 
-  describe "active record configuration" do
-    before do
-      class FakeActiveRecordUserSubscriber < SubPub::ActiveRecord::Subscriber
-        subscribe_to(FakeActiveRecordUser, 'after_create')
+  # describe "active record configuration" do
+    # describe "after create" do
+      # before do
+        # class FakeActiveRecordUserSubscriber < SubPub::ActiveRecord::Subscriber
+          # subscribe_to(FakeActiveRecordUser, 'after_commit')
 
-        def on_publish
-          FakeActiveRecordResult.create
-        end
-      end
-    end
+          # def on_publish
+            # FakeActiveRecordResult.create
+          # end
+        # end
+      # end
 
-    it "successfully calls through to the subscriber" do
-      FakeActiveRecordResult.all.size.should == 0
-      FakeActiveRecordUser.create
-      FakeActiveRecordResult.all.size.should == 1
-    end
-  end
+      # it "successfully calls through to the subscriber" do
+        # FakeActiveRecordResult.all.size.should == 0
+        # FakeActiveRecordUser.create
+        # FakeActiveRecordResult.all.size.should == 1
+      # end
+    # end
+  # end
 end

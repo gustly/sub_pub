@@ -24,7 +24,7 @@ RSpec.configure do |config|
   #
   #  Rails loads this during its setup
   #
-  SubPub::ActiveRecordExtensions.run_initializers
+  SubPub::Railtie.run_initializers
 
   #
   # Test database
