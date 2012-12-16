@@ -7,10 +7,18 @@ module SubPub
     attr_accessor :enabled, :scope, :subscriptions
 
     def initialize
-      @enabled = true
-      @scope = "sub_pub"
+      @enabled = default_enabled_state
+      @scope = default_scope
       @subscriptions = []
       super
+    end
+
+    def default_enabled_state
+      true
+    end
+
+    def default_scope
+      "sub_pub"
     end
 
     class << self
