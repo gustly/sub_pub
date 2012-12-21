@@ -27,6 +27,10 @@ module SubPub
       @subscription.topic
     end
 
+    def self.topic_name
+      topic
+    end
+
     def on_publish
       raise "Please define an on_publish method for #{self.class.name}"
     end

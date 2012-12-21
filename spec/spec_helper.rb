@@ -19,6 +19,8 @@ RSpec.configure do |config|
   #  Load the environment
   #
   require 'bundler'
+  require 'sub_pub_matchers'
+
   Bundler.require
 
   #
@@ -40,6 +42,7 @@ RSpec.configure do |config|
   # Use with_model
   #
   config.extend WithModel
+  config.include SubPub::Matchers
 
   #
   # Ensure pubsub is enabled

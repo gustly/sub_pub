@@ -25,6 +25,12 @@ Or install it yourself as:
 
     $ gem install sub_pub
 
+## RSpec Configuration
+
+    require 'sub_pub_matchers'
+    config.include SubPub::Matchers
+
+
 ## Usage
 
 ### Configuration
