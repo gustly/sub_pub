@@ -14,4 +14,10 @@ describe SubPub::Subscriber do
 
     it { should subscribe_to_topic('foo_bar_topic') }
   end
+
+  describe "#topic_name" do
+    it "returns the name of the topic sent to subscribe_to" do
+      Bazero.new.topic_name.should == 'foo_bar_topic'
+    end
+  end
 end

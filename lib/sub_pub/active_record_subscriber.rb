@@ -15,6 +15,14 @@ module SubPub
         @callback_name
       end
 
+      def callback_name
+        self.class.callback_name
+      end
+
+      def model_name
+        self.class.model_name
+      end
+
       def record
         options[:record]
       end

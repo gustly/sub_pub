@@ -3,15 +3,13 @@ module SubPub
     attr_reader :options
     alias :payload :options
 
-    def initialize(options)
+    def initialize(options={})
       @options = options
     end
 
     def self.subscribe_to(topic_name)
-      klass = self
-
       @subscription = SubPub.subscribe(topic_name) do |topic, options|
-        publish(klass.new(options))
+        publish(new(options))
       end
     end
 
@@ -29,6 +27,10 @@ module SubPub
 
     def self.topic_name
       topic
+    end
+
+    def topic_name
+      self.class.topic_name
     end
 
     def on_publish
