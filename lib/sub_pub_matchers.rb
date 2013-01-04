@@ -28,7 +28,7 @@ module SubPub
       end
 
       def matches?(subject)
-        @expected.name.should == subject.model_name
+        subject.model_name.should == @expected.name
       end
     end
 
@@ -38,7 +38,7 @@ module SubPub
       end
 
       def matches?(subject)
-        @expected.should == subject.callback_name
+        subject.callback_name.should == @expected
       end
     end
   end
