@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sub_pub (0.0.9)
+    sub_pub (0.0.10)
 
 GEM
   remote: https://rubygems.org/
