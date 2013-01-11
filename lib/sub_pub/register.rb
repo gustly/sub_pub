@@ -80,6 +80,10 @@ module SubPub
 
         instance.subscriptions = []
       end
+
+      def subscriptions
+        instance.subscriptions
+      end
     end
   end
 end

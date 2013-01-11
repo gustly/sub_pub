@@ -34,6 +34,10 @@ module SubPub
     def unsubscribe_all
       Register.unsubscribe_all
     end
+
+    def subscriptions
+      Register.subscriptions
+    end
   end
 end
 
