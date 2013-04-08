@@ -7,7 +7,7 @@ module SubPub
 
       config.after_initialize do
         Dir[
-          File.expand_path("app/models/pub_sub/*.rb", Rails.root)
+          File.expand_path("app/sub_pubs/*.rb", Rails.root)
         ].each { |file| require file }
       end
     end

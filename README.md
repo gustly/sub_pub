@@ -38,7 +38,7 @@ Or install it yourself as:
     SubPub.disable # disables publishing
     SubPub.enable  # enables publishing
 
-    By default, SubPub looks for subscribers in app/models/pub_sub/* 
+    By default, SubPub looks for subscribers in app/sub_pubs/* 
 
 
 ### Within a plain ruby project
@@ -80,7 +80,7 @@ Or install it yourself as:
     #
     # Subscribe to the after_create callback of User
     #
-    # currently, SubPub loads all subscribers in app/models/pub_sub/*
+    # currently, SubPub loads all subscribers in app/sub_pubs/*
     #
     class SendWelcomeEmailToUser < SubPub::ActiveRecord::Subscriber
       subscribe_to(User, 'after_create')
