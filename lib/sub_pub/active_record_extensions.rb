@@ -10,6 +10,14 @@ module SubPub
           end
         "
       end
+
+      [:create, :update, :destroy].each do |callback|
+        class_eval "
+          after_commit(on: callback) do
+            notify_pub_sub_of_active_record_callback('after_commit_on_#{callback.to_s}')
+          end
+        "
+      end
     end
 
     private

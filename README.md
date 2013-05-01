@@ -104,7 +104,9 @@ Or install it yourself as:
 * before_create
 * after_create
 * after_commit
-
+* after_commit on create
+* after_commit on update
+* after_commit on destroy
 
 ## Backlog / To Do
 

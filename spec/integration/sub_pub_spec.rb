@@ -156,6 +156,61 @@ describe SubPub do
       end
     end
 
+    describe "after commit on create" do
+      before do
+        class FakeActiveRecordUserSubscriber < SubPub::ActiveRecord::Subscriber
+          subscribe_to(FakeActiveRecordUser, 'after_commit_on_create')
+
+          def on_publish
+            FakeActiveRecordResult.create
+          end
+        end
+      end
+
+      it "successfully calls through to the subscriber" do
+        FakeActiveRecordResult.all.size.should == 0
+        FakeActiveRecordUser.create
+        FakeActiveRecordResult.all.size.should == 1
+      end
+    end
+
+    describe "after commit on destroy" do
+      before do
+        class FakeActiveRecordUserSubscriber < SubPub::ActiveRecord::Subscriber
+          subscribe_to(FakeActiveRecordUser, 'after_commit_on_destroy')
+
+          def on_publish
+            FakeActiveRecordResult.create
+          end
+        end
+      end
+
+      it "successfully calls through to the subscriber" do
+        FakeActiveRecordResult.all.size.should == 0
+        FakeActiveRecordUser.create.destroy
+        FakeActiveRecordResult.all.size.should == 1
+      end
+    end
+
+    describe "after commit on update" do
+      before do
+        class FakeActiveRecordUserSubscriber < SubPub::ActiveRecord::Subscriber
+          subscribe_to(FakeActiveRecordUser, 'after_commit_on_update')
+
+          def on_publish
+            FakeActiveRecordResult.create
+          end
+        end
+      end
+
+      it "successfully calls through to the subscriber" do
+        FakeActiveRecordResult.all.size.should == 0
+        fake_user = FakeActiveRecordUser.create
+        fake_user.update_attributes(title: "ABC")
+        FakeActiveRecordResult.all.size.should == 1
+      end
+    end
+
     describe "before create" do
       before do
         class FakeActiveRecordUserSubscriber < SubPub::ActiveRecord::Subscriber
