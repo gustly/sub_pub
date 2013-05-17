@@ -11,6 +11,8 @@ The result was a library that was:
 * easy to disable (when using the console, during unit tests, etc.)
 * easy to understand (b/c of AS::Notifications syncronous publishing queue)
 
+  - [![Build Status](https://travis-ci.org/gustly/sub_pub.png?branch=master)](https://travis-ci.org/gustly/sub_pub)
+
 ## Installation
 
 Add this line to your application's Gemfile:
