@@ -119,6 +119,25 @@ describe SubPub do
     end
   end
 
+  describe "register subscription only once" do
+    before do
+      SubPub.scope = 'foo-bar'
+
+      class CreateAccountSubscriber < SubPub::Subscriber
+        subscribe_to("new_account_posted")
+
+        def on_publish
+          FakeActiveRecordUser.create(title: options[:title])
+        end
+      end
+    end
+
+    it "calls the subscriber properly" do
+      CreateAccountSubscriber.subscribe_to("new_account_posted")
+      SubPub::Register.instance.subscriptions.count.should == 1
+    end
+  end
+
   describe "active record configuration" do
     describe "after create" do
       before do

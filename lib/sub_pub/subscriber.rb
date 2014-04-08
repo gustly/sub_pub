@@ -8,6 +8,10 @@ module SubPub
     end
 
     def self.subscribe_to(topic_name)
+      if subscription.present?
+        SubPub.unsubscribe(subscription)
+      end
+
       @subscription = SubPub.subscribe(topic_name) do |topic, options|
         publish(new(options))
       end

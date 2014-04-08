@@ -31,6 +31,10 @@ module SubPub
       Register.subscribe(*args, &block)
     end
 
+    def unsubscribe(subscription)
+      Register.unsubscribe(subscription)
+    end
+
     def unsubscribe_all
       Register.unsubscribe_all
     end

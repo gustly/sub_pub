@@ -73,6 +73,11 @@ module SubPub
         end
       end
 
+      def unsubscribe(subscription)
+        subscription.unsubscribe
+        instance.subscriptions.delete(subscription)
+      end
+
       def unsubscribe_all
         instance.subscriptions.each do |subscription|
           subscription.unsubscribe
