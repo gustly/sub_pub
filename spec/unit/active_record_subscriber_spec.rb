@@ -12,26 +12,35 @@ describe SubPub::ActiveRecord::Subscriber do
       subscribe_to(FooBar, 'after_create')
     end
 
-    class Bazz < SubPub::ActiveRecord::Subscriber
-      subscribe_to(FooBar, 'after_create')
+    class Blooz < SubPub::ActiveRecord::Subscriber
+      subscribe_to(FooBar, 'after_create', :title)
     end
   end
 
-  it "returns the model name observed" do
-    Fooz.model_name.should == 'FooBar'
+  describe ".model_name" do
+    specify { expect(Fooz.model_name).to eq('FooBar') }
   end
 
-  it "returns the callback observed" do
-    Bazz.callback_name.should == 'after_create'
+  describe ".callback_name" do
+    specify { expect(Fooz.callback_name).to eq('after_create') }
   end
 
-  context 'matchers' do
-    subject do
-      Fooz
+  describe ".table_attributes" do
+    context "with table attributes" do
+      specify { expect(Blooz.table_attributes).to eq([:title]) }
     end
 
-    it { should subscribe_to_model(FooBar) }
-    it { should subscribe_to_callback("after_create") }
+    context "without table attributes" do
+      specify { expect(Fooz.table_attributes).to eq([]) }
+    end
+  end
+
+  describe 'matchers' do
+    specify { expect(Fooz).to subscribe_to_model(FooBar) }
+    specify { expect(Fooz).to subscribe_to_callback("after_create") }
+
+    specify { expect(Blooz).to subscribe_to_model(FooBar) }
+    specify { expect(Blooz).to subscribe_to_callback("after_create", :title) }
   end
 end
 

@@ -7,7 +7,7 @@ describe SubPub do
   describe "initial state" do
     it "defaults enabled to true" do
       SubPub::Register.instance.enabled = nil
-      SubPub.enabled?.should be_true
+      SubPub.enabled?.should be true
     end
   end
 
@@ -15,14 +15,14 @@ describe SubPub do
     it "enables SubPub" do
       SubPub.disable
       SubPub.enable
-      SubPub.enabled?.should be_true
+      SubPub.enabled?.should be true
     end
   end
 
   describe "#disable" do
     it "disables SubPub" do
       SubPub.disable
-      SubPub.enabled?.should be_false
+      SubPub.enabled?.should be false
     end
   end
 
