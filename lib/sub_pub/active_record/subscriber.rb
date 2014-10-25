@@ -1,6 +1,6 @@
 module SubPub
   module ActiveRecord
-    class Subscriber < SubPub::Subscriber
+    class Subscriber < ::SubPub::Subscriber
       def self.subscribe_to(class_instance, callback_name, *table_attributes)
         @class_instance = class_instance
         @callback_name = callback_name
