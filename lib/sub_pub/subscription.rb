@@ -16,7 +16,7 @@ module SubPub
     end
 
     def unsubscribe
-      ActiveSupport::Notifications.unsubscribe(@scoped_topic.full_topic)
+      ActiveSupport::Notifications.unsubscribe(@subscription)
     end
 
     def topic
