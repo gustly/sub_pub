@@ -43,13 +43,14 @@ end
 
 require "sub_pub/version"
 require "sub_pub/subscriber"
-require "sub_pub/register"
 require "sub_pub/subscription"
+require "sub_pub/register"
 require "sub_pub/scoped_topic"
 
 require "rails"
 require "active_record"
 
-require "sub_pub/active_record_subscriber"
-require "sub_pub/active_record_extensions"
+require "sub_pub/active_record/publisher"
+require "sub_pub/active_record/subscriber"
+require "sub_pub/active_record/extensions"
 require "sub_pub/railtie"

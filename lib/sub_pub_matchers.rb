@@ -4,8 +4,8 @@ module SubPub
       SubscribeToModel.new(expected)
     end
 
-    def subscribe_to_callback(expected)
-      SubscribeToModelCallback.new(expected)
+    def subscribe_to_callback(*expected)
+      SubscribeToModelCallback.new(*expected)
     end
 
     def subscribe_to_topic(expected)
@@ -33,12 +33,13 @@ module SubPub
     end
 
     class SubscribeToModelCallback
-      def initialize(expected)
-        @expected = expected
+      def initialize(*expected)
+        @callback_name, *@table_attributes = *expected
       end
 
       def matches?(subject)
-        subject.callback_name.should == @expected
+        subject.callback_name.should == @callback_name
+        subject.table_attributes.should == @table_attributes
       end
     end
   end
