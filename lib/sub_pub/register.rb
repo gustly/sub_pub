@@ -46,11 +46,9 @@ module SubPub
         !instance.enabled
       end
 
-      def publish(*args, &block)
+      def publish(topic, payload = {}, &block)
         return if disabled?
 
-        topic = args.shift
-        payload = args.last
         full_topic = scoped(topic).full_topic
 
         ActiveSupport::Notifications.publish(full_topic, payload, &block)

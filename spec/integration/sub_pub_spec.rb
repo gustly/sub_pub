@@ -32,7 +32,7 @@ describe SubPub do
 
       it "does not publish" do
         ActiveSupport::Notifications.should_receive(:publish).never
-        SubPub.publish
+        SubPub.publish("my-message")
       end
     end
 
