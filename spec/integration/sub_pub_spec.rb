@@ -105,6 +105,24 @@ describe SubPub do
     end
   end
 
+  describe 'wildcard/regex subscriber matching' do
+    before do
+      class SubscriberClass < SubPub::Subscriber
+        subscribe_to(/event_*/)
+
+        def on_publish
+          FakeActiveRecordUser.create(title: options[:title])
+        end
+      end
+    end
+
+    it 'matches wild card events' do
+      FakeActiveRecordUser.all.size.should == 0
+      SubPub.publish("event_one", {title: 'foo'})
+      FakeActiveRecordUser.all.size.should == 1
+    end
+  end
+
   describe "register subscription only once" do
     before do
       SubPub.scope = 'foo-bar'
